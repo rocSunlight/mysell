@@ -11,6 +11,9 @@ import seller from 'components/seller/seller'
 Vue.use(VueRouter)
 Vue.use(VueResource)
 
+// 引入css
+import 'common/stylus/index.styl'
+
 const routes = [{
   path: '/',
   component: goods

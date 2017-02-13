@@ -2,12 +2,41 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import router from './router'
+import VueRouter from 'vue-router'
+import VueResource from 'vue-resource'
+import goods from 'components/goods/goods'
+import ratings from 'components/ratings/ratings'
+import seller from 'components/seller/seller'
 
-/* eslint-disable no-new */
+Vue.use(VueRouter)
+Vue.use(VueResource)
+
+const routes = [{
+  path: '/',
+  component: goods
+}, {
+  path: '/goods',
+  component: goods
+}, {
+  path: '/ratings',
+  component: ratings
+}, {
+  path: '/seller',
+  component: seller
+}]
+
+// 实例化个vuerouter
+const router = new VueRouter({
+  routes, // （缩写）相当于 routes: routes
+  linkActiveClass: 'active'
+})
+// 默认指定路径
+router.push('/goods')
+
+// 实例化一个vue
 new Vue({
   el: '#app',
   router,
-  template: '<App/>',
-  components: { App }
-})
+  render: h => h(App)
+}).$mount()
+

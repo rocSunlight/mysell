@@ -21,6 +21,7 @@
     },
     // 计算属性computed
     computed: {
+       // 设置star-加数字的class
       starType() {
         return 'star-' + this.size
       },

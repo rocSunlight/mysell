@@ -12,7 +12,10 @@
         <router-link to="/seller">商家</router-link>
       </div>
     </div>
-    <router-view></router-view>
+    <!--keep-alive主要用于保留组件状态或避免重新渲染。-->
+    <keep-alive>
+      <router-view :seller="seller"></router-view>
+    </keep-alive>
   </div>
 </template>
 
@@ -32,7 +35,6 @@
         response = response.body
         if (response.error === ERROR_OK) {
           this.seller = response.data
-          console.log(response.data)
         }
       }, response => {
         console.log('失败')

@@ -15,6 +15,7 @@
 
   export default {
     props: {
+      // food父组件传过来一个对象
       food: {
         type: Object
       }
@@ -29,6 +30,8 @@
         } else {
           this.food.count++
         }
+        // 从父组件返回事件的目标节点
+        this.$emit('add', event.target)
       },
       cartDecrease(event) {
         if (!event._constructed) {
@@ -55,10 +58,10 @@
         line-height: 24px
         font-size: 24px
         color: rgb(0, 160, 220)
-        transition: all 0.4s linear
+        transition: all 0.3s linear
         transform: rotate(0)
       &.move-enter-active, &.move-leave-active
-        transition: all 0.4s linear
+        transition: all 0.3s linear
       &.move-enter, &.move-leave-active
         opacity: 0
         transform: translate3d(24px, 0, 0)

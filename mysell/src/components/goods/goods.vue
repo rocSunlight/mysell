@@ -43,7 +43,7 @@
       <!--引入购物车组件-->
       <v-shopcart ref="shopcart" :selectFoods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></v-shopcart>
     </div>
-    <v-food :food="selectedFood" ref="food"></v-food>
+    <v-food @add="addFood" :food="selectedFood" ref="food"></v-food>
   </div>
 </template>
 

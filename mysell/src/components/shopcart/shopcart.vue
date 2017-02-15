@@ -192,9 +192,7 @@
           if (!ball.show) {
             ball.show = true
             ball.el = el
-            // 把获取到的对象存到数组
             this.dropBalls.push(ball)
-            console.log(ball.show)
             return
           }
         }

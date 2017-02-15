@@ -24,7 +24,7 @@
             <v-cartcontrol @add="addFood" :food="food"></v-cartcontrol>
           </div>
           <transition name="fade">
-            <div @click="addFirst" class="buy" v-show="!food.count || food.count ===0">加入购物车</div>
+            <div @click.stop.prevent="addFirst" class="buy" v-show="!food.count || food.count ===0">加入购物车</div>
           </transition>
         </div>
       </div>
@@ -65,17 +65,17 @@
       hideDack() {
         this.showFlag = false
       },
-      addFood(target) {
-        this.$emit('add', target)
-      },
       addFirst(event) {
         if (!event._constructed) {
           return
         }
-        console.log(event.target)
         // 从父组件返回事件的目标节点
         this.$emit('add', event.target)
+        // 设置对象的属性
         Vue.set(this.food, 'count', 1)
+      },
+      addFood(target) {
+        this.$emit('add', target)
       }
     },
     components: {

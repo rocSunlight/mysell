@@ -25,10 +25,10 @@
           </div>
         </div>
         <v-split></v-split>
-        <v-ratingseller :selectType="selectType" :onlyContent="onlyContent" :ratings="ratings"></v-ratingseller>
+        <v-ratingseller :selectType="selectType" :onlyContent="onlyContent" :ratings="ratings" @select="selectRating" @toggle="toggleContent"></v-ratingseller>
         <div class="rating-wrapper">
           <ul>
-            <li v-for="rating in ratings" class="rating-item border-1px">
+            <li v-for="rating in ratings" class="rating-item border-1px" v-show="needShow(rating.rateType,rating.text)">
               <div class="avatar">
                 <img width="28" height="28" :src="rating.avatar" >
               </div>
@@ -76,6 +76,34 @@
         ratings: [],
         selectType: ALL,
         onlyContent: false
+      }
+    },
+    methods: {
+      // 接受从子组件传递给父组件的变化
+      selectRating(type) {
+        this.selectType = type
+        this.$nextTick(() => {
+          this.scroll.refresh()
+        })
+      },
+      // 接受从子组件传递给父组件的变化
+      toggleContent() {
+        this.onlyContent = !this.onlyContent
+        this.$nextTick(() => {
+          this.scroll.refresh()
+        })
+      },
+      needShow(type, text) {
+        // 判断是否显示内容
+        if (this.onlyContent && !text) {
+          return false
+        }
+        // 判断selectType的类型把对应的呈现
+        if (this.selectType === ALL) {
+          return true
+        } else {
+          return type === this.selectType
+        }
       }
     },
     // 生命周期

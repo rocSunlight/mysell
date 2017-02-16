@@ -43,7 +43,7 @@
                     <span class="name">{{rating.username}}</span>
                     <img class="avatar" width="12" height="12" :src="rating.avatar" >
                   </div>
-                  <div class="time">{{rating.rateTime}}</div>
+                  <div class="time">{{rating.rateTime | formatDate}}</div>
                   <p class="text">
                     <i :class="{'icon-thumb_up':rating.rateType===0,'icon-thumb_down':rating.rateType===1}"></i>
                     {{rating.text}}
@@ -66,6 +66,8 @@
   import cartcontrol from 'components/cartcontrol/cartcontrol'
   import split from 'components/split/split'
   import ratingseller from 'components/ratingseller/ratingseller'
+  // 调用时间组件
+  import {formatDate} from 'common/js/date'
 
   const ALL = 2
 
@@ -142,6 +144,13 @@
         } else {
           return type === this.selectType
         }
+      }
+    },
+    // 组件filters转换时间戳
+    filters: {
+      formatDate(time) {
+        let date = new Date(time)
+        return formatDate(date, 'yyyy-MM-dd hh:mm')
       }
     },
     components: {
@@ -302,4 +311,5 @@
         .no-rating
           padding 16px 0
           font-size 12px
+          color rgb(147, 153, 159)
 </style>
